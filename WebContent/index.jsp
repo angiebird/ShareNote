@@ -7,6 +7,7 @@
 <%@ page import="com.amazonaws.services.s3.model.*" %>
 <%@ page import="com.amazonaws.services.dynamodbv2.*" %>
 <%@ page import="com.amazonaws.services.dynamodbv2.model.*" %>
+<%@ page import="java.util.*" %>
 
 <%! // Share the client objects across threads to
     // avoid creating new clients for each web request
@@ -36,6 +37,13 @@
         s3     = new AmazonS3Client(credentialsProvider);
         dynamo = new AmazonDynamoDBClient(credentialsProvider);
     }
+%>
+<%
+Map<String, AttributeValue> item = new HashMap<String, AttributeValue>();
+item.put("docId", new AttributeValue.withS("angie"));
+item.put("text", new AttributeValue.withS("haha"));
+PutItemRequest pr = new PutItemRequest("ShareNote", item);
+dynamo.putItem(pr);
 %>
 
 <!DOCTYPE html>

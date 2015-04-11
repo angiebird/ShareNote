@@ -8,22 +8,33 @@
 <%@ page import="com.amazonaws.services.dynamodbv2.*" %>
 <%@ page import="com.amazonaws.services.dynamodbv2.model.*" %>
 
+<script src="https://sdk.amazonaws.com/js/aws-sdk-2.1.23.min.js"></script>
+
+<script type="text/javascript">
+  // See the Configuring section to configure credentials in the SDK
+  AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+    IdentityPoolId: "us-east-1:ce945b36-68e3-4d0e-a083-66b496c8eb5f",
+  });
+  // Configure your region
+  AWS.config.region = 'us-east-1';
+</script>
+
 
 <% //Init in = new Init(); 
 	//AmazonDynamoDB dynamo = new AmazonDynamoDBClient(credentialsProvider);
 %>
 <script>
 function upload(){
-	var table = new AWS.DynamoDB({params: {TableName: 'AsignmentData'}});
+	var table = new AWS.DynamoDB({params: {TableName: 'ShareNote'}});
 	var key = 'test';
 
 	// Write the item to the table
 	var itemParams = {Item: {id: {S: key}, data: {S: 'data'}}};
 	table.putItem(itemParams, function() {
 	  // Read the item from the table
-	  table.getItem({Key: {id: {S: key}}}, function(err, data) {
-	    console.log(data.Item); // print the item data
-	  });
+	//  table.getItem({Key: {id: {S: key}}}, function(err, data) {
+	//    console.log(data.Item); // print the item data
+	//  });
 	});
 }
 </script>
