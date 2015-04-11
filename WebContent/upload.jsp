@@ -35,6 +35,15 @@ function upload(){
 	table.getItem({Key: {docId: {S: key}}}, function(err, data) {
     console.log(data.Item); // print the item data
 	});
+	
+	key = 'Yaya';
+	var itemParams = {Item: {docId: {S: key}, data: {S: 'data'}}};
+	table.putItem(itemParams, function() {
+	  // Read the item from the table
+	  table.getItem({Key: {docId: {S: key}}}, function(err, data) {
+	    console.log(data.Item); // print the item data
+	  });
+	});
 }
 </script>
 <button onclick="upload()"> upload </button>
