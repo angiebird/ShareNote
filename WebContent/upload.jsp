@@ -25,16 +25,15 @@
 %>
 <script>
 function upload(){
+	var db = new AWS.DynamoDB();
+	db.listTables(function(err, data) {
+	  console.log(data.TableNames);
+	});
 	var table = new AWS.DynamoDB({params: {TableName: 'ShareNote'}});
-	var key = 'test';
+	var key = 'Angie';
 
-	// Write the item to the table
-	var itemParams = {Item: {id: {S: key}, data: {S: 'data'}}};
-	table.putItem(itemParams, function() {
-	  // Read the item from the table
-	//  table.getItem({Key: {id: {S: key}}}, function(err, data) {
-	//    console.log(data.Item); // print the item data
-	//  });
+	table.getItem({Key: {docId: {S: key}}}, function(err, data) {
+    console.log(data.Item); // print the item data
 	});
 }
 </script>

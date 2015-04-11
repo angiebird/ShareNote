@@ -38,13 +38,6 @@
         dynamo = new AmazonDynamoDBClient(credentialsProvider);
     }
 %>
-<%
-Map<String, AttributeValue> item = new HashMap<String, AttributeValue>();
-item.put("docId", new AttributeValue.withS("angie"));
-item.put("text", new AttributeValue.withS("haha"));
-PutItemRequest pr = new PutItemRequest("ShareNote", item);
-dynamo.putItem(pr);
-%>
 
 <!DOCTYPE html>
 <html>
